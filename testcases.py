@@ -23,5 +23,13 @@ class FlaskTestCase(unittest.TestCase):
         data = json.loads(response.get_data(as_text=True))
         self.assertEqual(data['result'], 5)
 
+    def test_multiply(self):
+        response = self.app.post('/multiply', 
+                                  data=json.dumps(dict(num1=10, num2=5)), 
+                                  content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        data = json.loads(response.get_data(as_text=True))
+        self.assertEqual(data['result'], 50)
+
 if __name__ == '__main__':
     unittest.main()
